@@ -13,5 +13,5 @@ setup(
   author_email='jtonye@ymail.com',
   license='MIT',
   packages=['counter'],
-  install_requires=['requests'],
+  install_requires=['requests', 'click'],
 )
