@@ -1,17 +1,16 @@
-from setuptools import setup
-
+from setuptools import setup, find_packages
 
 
 setup(
-  name='counter',
+  name='github-deploy',
   version='0.0.1',
-  description='A Python package for getting list of numbers from 1 to 100',
-  url='https://github.com/tj-python/github-yaml-deploy',
+  description='Deploy yaml files to a large number of repositories in seconds.',
+  url='https://github.com/tj-python/github-deploy',
   entry_points={'console_scripts': ['github-deploy=deploy:main']},
-  keywords=['counter', 'programming language ranking', 'index', 'programming language'],
+  keywords=['yaml', 'deploy', 'poly repository'],
   author='Tonye Jack',
   author_email='jtonye@ymail.com',
   license='MIT',
-  packages=['counter'],
-  install_requires=['requests', 'click'],
+  packages=find_packages(),
+  install_requires=['asyncclick', 'asyncio', 'aiohttp', 'certifi', 'colorama', 'aiofiles'],
 )
