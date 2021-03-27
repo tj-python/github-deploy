@@ -69,7 +69,6 @@ async def upload_content(*, session, repo, source, dest, token, semaphore, exist
     url = BASE_URL.format(repo=repo, path=dest)
     
     async with semaphore:
-        print(data)
         response = await put(session=session, url=url, data=data, headers=headers)
     
     return response
@@ -184,9 +183,10 @@ async def main(org, token, dest, overwrite):
     for repo, result in zip(repos, responses):
         if isinstance(result, (ValueError, Exception)):
             click.echo(
-                (
+                click.style(
                     'Error uploading {source} to {repo}/{dest}: {error}'
-                    .format(source=source, repo=repo, dest=dest, error=result)
+                    .format(source=source, repo=repo, dest=dest, error=result),
+                    fg='red',
                 ),
                 err=True,
             )
