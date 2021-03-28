@@ -4,6 +4,8 @@ Python package that automates deployment of yaml/yml files to multiple repositor
 
 ## Usage
 
+### Updating files on github
+
 `github-deploy`
 
 ```shell script
@@ -18,6 +20,8 @@ github-deploy --org tj-actions --token [PAT_TOKEN] --dest '.github/workflows/aut
 
 > NOTE: `auto-approve.yml` is located on your local system.
 
+
+### Deleting files on github
 
 `github-delete`
 
