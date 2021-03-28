@@ -6,7 +6,12 @@ setup(
     version="0.0.1",
     description="Deploy yaml files to a large number of repositories in seconds.",
     url="https://github.com/tj-python/github-deploy",
-    entry_points={"console_scripts": ["github-deploy=deploy:main"]},
+    entry_points={
+        "console_scripts": [
+            "github-deploy=deploy:main",
+            "github-delete=delete:main",
+        ],
+    },
     keywords=["yaml", "deploy", "poly repository"],
     author="Tonye Jack",
     author_email="jtonye@ymail.com",
