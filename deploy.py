@@ -217,6 +217,16 @@ async def main(org, token, source, dest, overwrite):
         click.echo(click.style(deploy_msg, fg="blue"))
         click.echo("\n".join(repos))
 
+        if source not in dest:
+            click.echo(
+                click.style(
+                    "The source file {} doesn't match the destination {}".format(
+                        source, dest
+                    ),
+                    fg="bright_red",
+                )
+            )
+
         c = click.prompt(click.style("Continue? [Yn] ", fg="blue"))
 
         if c.lower() == "y":
