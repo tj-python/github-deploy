@@ -217,7 +217,7 @@ async def main(org, token, dest):
                 err=True,
             )
         else:
-            click.echo(click.style(result, fg="green"))
+            click.echo(click.style(result, fg="green", bold=True))
 
 
 if __name__ == "__main__":
