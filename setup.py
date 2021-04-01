@@ -1,3 +1,5 @@
+from __future__ import division
+
 import os
 from setuptools import setup, find_packages
 
@@ -6,7 +8,7 @@ README_PATH = os.path.join(BASE_DIR, "README.md")
 LONG_DESCRIPTION_TYPE = "text/markdown"
 
 if os.path.isfile(README_PATH):
-    with open(README_PATH, encoding="utf-8") as f:
+    with open(README_PATH) as f:
         LONG_DESCRIPTION = f.read()
 else:
     LONG_DESCRIPTION = ""
