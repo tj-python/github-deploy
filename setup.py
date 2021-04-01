@@ -12,7 +12,7 @@ setup(
             "github-delete=delete:main",
         ],
     },
-    keywords=["yaml", "deploy", "poly repository"],
+    keywords=["yaml", "deploy", "poly repository", "github", "single configuration"],
     author="Tonye Jack",
     author_email="jtonye@ymail.com",
     license="MIT",
