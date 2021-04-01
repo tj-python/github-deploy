@@ -4,7 +4,9 @@
 # github-deploy
 
 ## Problem
-Using [poly repositories](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo#what-is-polyrepo) to manage projects can introduce a number challenges one of which is maintaining consistency across multiple repositories for files like shared configurations in your organization.
+Using [poly repositories](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo#what-is-polyrepo) to manage projects ?
+
+This can introduce a number challenges one of which is maintaining consistency across multiple repositories for files like shared configurations in your organization without introducing git submodules.
 
 
 > For example adding a github action or maintaing a consistent pull request template accross your organization.
