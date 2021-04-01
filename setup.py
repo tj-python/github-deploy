@@ -21,8 +21,7 @@ setup(
     url="https://github.com/tj-python/github-deploy",
     entry_points={
         "console_scripts": [
-            "github-deploy=deploy:main",
-            "github-delete=delete:main",
+            "github-deploy=main:main",
         ],
     },
     keywords=["yaml", "deploy", "poly repository", "github", "single configuration"],
