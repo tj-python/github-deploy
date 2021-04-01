@@ -1,3 +1,5 @@
+[![Upload Python Package](https://github.com/tj-python/github-deploy/actions/workflows/python-publish.yml/badge.svg)](https://github.com/tj-python/github-deploy/actions/workflows/python-publish.yml)
+
 # github-deploy
 
 Using [poly repositories](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo#what-is-polyrepo) to manage projects can introduce a number challenges one of which is maintaining consistency across multiple repositories for configurations that needs to be the same accross all of them in your organization.
