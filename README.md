@@ -1,7 +1,4 @@
 # github-deploy
-Python package that automates deployment of files to multiple repositories all at once
-
-
 
 Using polyrepo's to manage projects can pose a number challenges one of which is maintaining consitency across multiple repositories for configurations that needs be the same accross all of them in your organization.
 
