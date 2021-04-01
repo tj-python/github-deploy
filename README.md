@@ -14,9 +14,8 @@ This can introduce a number challenges one of which is maintaining consistency a
 
 ## Usage
 
-#### Creating or Updating files on github
+### Creating or Updating files on github
 
-`github-deploy`
 
 ```shell script
 github-deploy update --org [org] --token [PAT_TOKEN] --dest [LOCATION TO UPLOAD FILE] --source [SOURCE FILE LOCATION]
@@ -31,9 +30,8 @@ github-deploy update --org tj-actions --token [PAT_TOKEN] --dest '.github/workfl
 > NOTE: `auto-approve.yml` is located on your local system.
 
 
-#### Deleting files on github
+### Deleting files on github
 
-`github-delete`
 
 ```shell script
 github-deploy delete --org [org] --token [PAT_TOKEN] --dest [LOCATION TO DELETE]
