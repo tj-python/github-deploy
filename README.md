@@ -38,3 +38,7 @@ Example:
 ```shell script
 github-delete --org tj-actions --token [PAT_TOKEN] --dest '.github/auto-approve.yml'
 ```
+
+
+#### Resources
+- http://www.gigamonkeys.com/mono-vs-multi/
