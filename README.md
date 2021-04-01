@@ -40,5 +40,5 @@ github-delete --org tj-actions --token [PAT_TOKEN] --dest '.github/auto-approve.
 ```
 
 
-#### Resources
+### Resources
 - http://www.gigamonkeys.com/mono-vs-multi/
