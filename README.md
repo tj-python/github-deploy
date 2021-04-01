@@ -1,6 +1,6 @@
 # github-deploy
 
-Using poly repositories to manage projects can introduce a number challenges one of which is maintaining consitency across multiple repositories for configurations that needs to be the same accross all of them in your organization.
+Using [poly repositories](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo#what-is-polyrepo) to manage projects can introduce a number challenges one of which is maintaining consitency across multiple repositories for configurations that needs to be the same accross all of them in your organization.
 
 
 > For example adding a github action or maintaing a consistent pull request template accross your organization.
