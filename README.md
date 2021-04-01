@@ -19,13 +19,13 @@ This can introduce a number challenges one of which is maintaining consistency a
 `github-deploy`
 
 ```shell script
-github-deploy --org [org] --token [PAT_TOKEN] --dest [LOCATION TO UPLOAD FILE] --source [SOURCE FILE LOCATION]
+github-deploy update --org [org] --token [PAT_TOKEN] --dest [LOCATION TO UPLOAD FILE] --source [SOURCE FILE LOCATION]
 ```
 
 Example:
 
 ```shell script
-github-deploy --org tj-actions --token [PAT_TOKEN] --dest '.github/workflows/auto-approve.yml' --source auto-approve.yml
+github-deploy update --org tj-actions --token [PAT_TOKEN] --dest '.github/workflows/auto-approve.yml' --source auto-approve.yml
 ```
 
 > NOTE: `auto-approve.yml` is located on your local system.
@@ -36,13 +36,13 @@ github-deploy --org tj-actions --token [PAT_TOKEN] --dest '.github/workflows/aut
 `github-delete`
 
 ```shell script
-github-delete --org [org] --token [PAT_TOKEN] --dest [LOCATION TO DELETE]
+github-deploy delete --org [org] --token [PAT_TOKEN] --dest [LOCATION TO DELETE]
 ```
 
 Example:
 
 ```shell script
-github-delete --org tj-actions --token [PAT_TOKEN] --dest '.github/auto-approve.yml'
+github-deploy delete --org tj-actions --token [PAT_TOKEN] --dest '.github/auto-approve.yml'
 ```
 
 
