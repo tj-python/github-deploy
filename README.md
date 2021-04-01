@@ -1,3 +1,4 @@
+[![PyPI version](https://badge.fury.io/py/github-deploy.svg)](https://badge.fury.io/py/github-deploy)
 [![Upload Python Package](https://github.com/tj-python/github-deploy/actions/workflows/python-publish.yml/badge.svg)](https://github.com/tj-python/github-deploy/actions/workflows/python-publish.yml)
 
 # github-deploy
