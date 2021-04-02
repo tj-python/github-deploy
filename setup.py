@@ -31,6 +31,7 @@ setup(
     author_email="jtonye@ymail.com",
     license="MIT",
     packages=find_packages(),
+    python_requires='>=3.6',
     install_requires=[
         "asyncclick",
         "asyncio",
