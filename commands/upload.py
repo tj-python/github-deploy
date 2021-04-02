@@ -7,8 +7,8 @@ import aiohttp
 import asyncclick as click
 import certifi
 
-from constants import BASE_URL, REPOS_URL
-from utils import get_repo
+from commands._constants import BASE_URL, REPOS_URL
+from commands._utils import get_repo
 
 
 async def get(*, session, url, headers=None, skip_missing=False):

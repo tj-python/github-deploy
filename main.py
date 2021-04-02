@@ -9,7 +9,7 @@ class GithubDeploy(click.MultiCommand):
     def list_commands(self, ctx):
         rv = []
         for filename in os.listdir(plugin_folder):
-            if filename.endswith('.py') and not filename.startswith('__init__'):
+            if filename.endswith('.py') and not filename.startswith('__init__') and not filename.startswith('_'):
                 rv.append(filename[:-3])
         rv.sort()
         return rv
