@@ -189,10 +189,6 @@ async def main(org, token, dest):
             return
 
         for repo in repos:
-            click.echo(
-                "Deleting {path} for repository: {repo}...".format(path=dest, repo=repo)
-            )
-
             task = asyncio.ensure_future(
                 handle_file_delete(
                     repo=repo,
