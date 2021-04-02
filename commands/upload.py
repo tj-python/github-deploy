@@ -170,6 +170,7 @@ async def list_repos(*, session, org, token):
     prompt=click.style("Enter your personal access token", bold=True),
     help="Personal Access token with read and write access to org.",
     hide_input=True,
+    envvar='TOKEN',
 )
 @click.option(
     "--source",
@@ -183,7 +184,10 @@ async def list_repos(*, session, org, token):
     help="Destination path.",
 )
 @click.option(
-    "--overwrite/--no-overwrite", help="Overwrite existing files.", default=True
+    "--overwrite/--no-overwrite",
+    prompt=click.style("Should we overwrite existing contents at this path", fg="cyan"),
+    help="Overwrite existing files.",
+    default=False,
 )
 async def main(org, token, source, dest, overwrite):
     """Upload a file to all repositories owned by an organization/user."""
@@ -237,10 +241,6 @@ async def main(org, token, source, dest, overwrite):
             return
 
         for repo in repos:
-            click.echo(
-                "Uploading {path} to repository {repo}...".format(path=dest, repo=repo)
-            )
-
             task = asyncio.ensure_future(
                 handle_file_upload(
                     repo=repo,
