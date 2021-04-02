@@ -1,14 +1,12 @@
 import asyncio
-import base64
 import ssl
 
-import aiofiles
 import aiohttp
 import asyncclick as click
 import certifi
 
-from commands._constants import BASE_URL, REPOS_URL
-from commands._utils import get_repo
+from github_deploy.commands._constants import BASE_URL, REPOS_URL
+from github_deploy.commands._utils import get_repo
 
 
 async def get(*, session, url, headers=None, skip_missing=False):
@@ -28,10 +26,10 @@ async def get(*, session, url, headers=None, skip_missing=False):
         return value
 
 
-async def put(*, session, url, data, headers=None):
+async def delete(*, session, url, data, headers=None):
     ssl_context = ssl.create_default_context(cafile=certifi.where())
 
-    async with session.put(
+    async with session.delete(
         url,
         json=data,
         headers=headers,
@@ -43,43 +41,29 @@ async def put(*, session, url, data, headers=None):
         return value
 
 
-async def upload_content(
+async def delete_content(
     *,
     session,
     repo,
-    source,
     dest,
     token,
     semaphore,
     exists,
     current_sha,
-    current_content
 ):
     headers = {
         "Authorization": "token {token}".format(token=token),
         "Accept": "application/vnd.github.v3+json",
     }
 
-    async with semaphore:
-        async with aiofiles.open(source, mode="rb") as f:
-            output = await f.read()
-            base64_content = base64.b64encode(output).decode("ascii")
-
-    if current_content == base64_content:
-        click.echo("Skipping: Contents are the same.")
-        return
-
-    data = {
-        "message": "Updated {}".format(dest) if exists else "Added {}".format(dest),
-        "content": base64_content,
-    }
+    data = {"message": "Deleted {}".format(dest)}
     if exists:
         data["sha"] = current_sha
 
     url = BASE_URL.format(repo=repo, path=dest)
 
     async with semaphore:
-        response = await put(session=session, url=url, data=data, headers=headers)
+        response = await delete(session=session, url=url, data=data, headers=headers)
 
     return response
 
@@ -96,8 +80,8 @@ async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
     return response
 
 
-async def handle_file_upload(
-    *, repo, source, dest, overwrite, token, semaphore, session
+async def handle_file_delete(
+    *, repo, dest, token, semaphore, session
 ):
     check_exists_response = await check_exists(
         session=session,
@@ -109,43 +93,35 @@ async def handle_file_upload(
     )
 
     current_sha = check_exists_response.get("sha")
-    current_content = check_exists_response.get("content")
     exists = current_sha is not None
 
-    if exists and not overwrite:
-        return "Skipped uploading {source} to {repo}: Found an existing copy.".format(
-            source=source, repo=repo
+    if exists:
+        click.echo(
+            click.style(
+                "Found an existing copy at {repo}/{path} deleting it's contents...".format(
+                    repo=repo, path=dest
+                ),
+                fg="blue",
+            ),
         )
 
-    else:
-        if exists:
-            click.echo(
-                click.style(
-                    "Found an existing copy at {repo}/{path} overwriting it's contents...".format(
-                        repo=repo, path=dest
-                    ),
-                    fg="blue",
-                ),
-            )
-
-        upload_response = await upload_content(
+        delete_response = await delete_content(
             session=session,
             repo=repo,
-            source=source,
             dest=dest,
             token=token,
             semaphore=semaphore,
             exists=exists,
             current_sha=current_sha,
-            current_content=current_content,
         )
-
-        if upload_response:
-            return "Successfully uploaded '{source}' to {repo}/{dest}".format(
-                source=upload_response["content"]["name"],
+    
+        if delete_response:
+            return "Successfully deleted contents at {repo}/{dest}".format(
                 repo=repo,
-                dest=upload_response["content"]["path"],
+                dest=dest,
             )
+    
+    return "No content found at {repo}/{dest}".format(repo=repo, dest=dest)
 
 
 async def list_repos(*, session, org, token):
@@ -173,24 +149,13 @@ async def list_repos(*, session, org, token):
     envvar='TOKEN',
 )
 @click.option(
-    "--source",
-    prompt=click.style("Enter path to source file", fg="blue"),
-    help="Source file.",
-    type=click.Path(exists=True),
-)
-@click.option(
     "--dest",
-    prompt=click.style("Where should we upload this file", fg="blue"),
-    help="Destination path.",
+    prompt=click.style("What path should it's contents be deleted", fg="blue"),
+    help="Destination path to delete.",
 )
-@click.option(
-    "--overwrite/--no-overwrite",
-    prompt=click.style("Should we overwrite existing contents at this path", fg="cyan"),
-    help="Overwrite existing files.",
-    default=False,
-)
-async def main(org, token, source, dest, overwrite):
-    """Upload a file to all repositories owned by an organization/user."""
+async def main(org, token, dest):
+    """Delete a file in all repositories owned by an organization/user."""
+
     # create instance of Semaphore: max concurrent requests.
     semaphore = asyncio.Semaphore(1000)
 
@@ -205,34 +170,17 @@ async def main(org, token, source, dest, overwrite):
         ]
         click.echo(
             click.style(
-                "Found '{}' repositories non archived repositories:".format(len(repos)),
+                "Found '{}' repositories non archived repositories".format(len(repos)),
                 fg="green",
             )
         )
+        click.echo(click.style('Deleting "{path}" for all repositories:'.format(path=dest), fg="blue"))
         click.echo("\n".join(repos))
 
-        if source not in dest:
-            click.echo(
-                click.style(
-                    "The source file {} doesn't match the destination {}".format(
-                        source, dest
-                    ),
-                    fg="bright_red",
-                )
-            )
-        deploy_msg = (
-            'Deploying "{source}" to "{path}" for all repositories'.format(source=source, path=dest)
-            if overwrite
-            else 'Deploying "{source}" to repositories that don\'t already have contents at "{path}"'.format(
-                source=source,
-                path=dest
-            )
-        )
-        click.echo(click.style(deploy_msg, fg="blue"))
         c = click.prompt(click.style("Continue? [Yn] ", fg="blue"))
 
         if c.lower() == "y":
-            click.echo(click.style("Uploading...", blink=True, fg="green"))
+            click.echo(click.style("Deleting...", blink=True, fg="green"))
         elif c.lower() == "n":
             click.echo("Abort!")
             return
@@ -241,13 +189,15 @@ async def main(org, token, source, dest, overwrite):
             return
 
         for repo in repos:
+            click.echo(
+                "Deleting {path} for repository: {repo}...".format(path=dest, repo=repo)
+            )
+
             task = asyncio.ensure_future(
-                handle_file_upload(
+                handle_file_delete(
                     repo=repo,
-                    source=source,
                     dest=dest,
                     token=token,
-                    overwrite=overwrite,
                     session=session,
                     semaphore=semaphore,
                 )
@@ -260,8 +210,8 @@ async def main(org, token, source, dest, overwrite):
         if isinstance(result, (ValueError, Exception)):
             click.echo(
                 click.style(
-                    "Error uploading {source} to {repo}/{dest}: {error}".format(
-                        source=source, repo=repo, dest=dest, error=result
+                    "Error deleting contents at {repo}/{dest}: {error}".format(
+                        repo=repo, dest=dest, error=result
                     ),
                     fg="red",
                 ),

@@ -1,5 +1,3 @@
-from __future__ import division
-
 import os
 from setuptools import setup, find_packages
 
@@ -23,7 +21,7 @@ setup(
     url="https://github.com/tj-python/github-deploy",
     entry_points={
         "console_scripts": [
-            "github-deploy=main:main",
+            "github-deploy=github_deploy.main:main",
         ],
     },
     keywords=["yaml", "deploy", "poly repository", "github", "single configuration"],
