@@ -186,7 +186,7 @@ async def list_repos(*, session, org, token):
     "--overwrite/--no-overwrite", help="Overwrite existing files.", default=True
 )
 async def main(org, token, source, dest, overwrite):
-    """Deploy a file to all repositories owned by an organization/user."""
+    """Upload a file to all repositories owned by an organization/user."""
     # create instance of Semaphore: max concurrent requests.
     semaphore = asyncio.Semaphore(1000)
 
