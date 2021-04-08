@@ -22,6 +22,7 @@ setup(
     entry_points={
         "console_scripts": [
             "github-deploy=github_deploy.main:main",
+            "gh-deploy=github_deploy.main:main",
         ],
     },
     keywords=["yaml", "deploy", "poly repository", "github", "single configuration"],
