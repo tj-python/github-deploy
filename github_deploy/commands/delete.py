@@ -116,12 +116,20 @@ async def handle_file_delete(
         )
     
         if delete_response:
-            return "Successfully deleted contents at {repo}/{dest}".format(
-                repo=repo,
-                dest=dest,
+            return click.style(
+                "Successfully deleted contents at {repo}/{dest}".format(
+                    repo=repo,
+                    dest=dest,
+                ),
+                fg="green",
+                bold=True,
             )
     
-    return "No content found at {repo}/{dest}".format(repo=repo, dest=dest)
+    return click.style(
+        "No content found at {repo}/{dest}".format(repo=repo, dest=dest),
+        fg="blue",
+        bold=True,
+    )
 
 
 async def list_repos(*, session, org, token):
@@ -214,7 +222,7 @@ async def main(org, token, dest):
                 err=True,
             )
         else:
-            click.echo(click.style(result, fg="green", bold=True))
+            click.echo(result)
 
 
 if __name__ == "__main__":

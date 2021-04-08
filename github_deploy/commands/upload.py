@@ -113,8 +113,14 @@ async def handle_file_upload(
     exists = current_sha is not None
 
     if exists and not overwrite:
-        return "Skipped uploading {source} to {repo}: Found an existing copy.".format(
-            source=source, repo=repo
+        return click.style(
+            "Skipped uploading {source} to {repo}/{path}: Found an existing copy.".format(
+                source=source,
+                repo=repo,
+                path=dest,
+            ),
+            fg="blue",
+            bold=True
         )
 
     else:
@@ -141,10 +147,14 @@ async def handle_file_upload(
         )
 
         if upload_response:
-            return "Successfully uploaded '{source}' to {repo}/{dest}".format(
-                source=upload_response["content"]["name"],
-                repo=repo,
-                dest=upload_response["content"]["path"],
+            return click.style(
+                "Successfully uploaded '{source}' to {repo}/{dest}".format(
+                    source=upload_response["content"]["name"],
+                    repo=repo,
+                    dest=upload_response["content"]["path"],
+                ),
+                fg="green",
+                bold=True
             )
 
 
@@ -185,7 +195,7 @@ async def list_repos(*, session, org, token):
 )
 @click.option(
     "--overwrite/--no-overwrite",
-    prompt=click.style("Should we overwrite existing contents at this path", fg="cyan"),
+    prompt=click.style("Should we overwrite existing contents at this path", fg="blue"),
     help="Overwrite existing files.",
     default=False,
 )
@@ -268,7 +278,7 @@ async def main(org, token, source, dest, overwrite):
                 err=True,
             )
         else:
-            click.echo(click.style(result, fg="green", bold=True))
+            click.echo(result)
 
 
 if __name__ == "__main__":
