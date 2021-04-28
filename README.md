@@ -6,7 +6,7 @@
 ## Problem
 Using [poly repositories](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo#what-is-polyrepo) to manage projects ?
 
-This can introduce a number challenges one of which is maintaining consistency across multiple repositories for files like shared configurations in your organization without introducing git submodules or mono repositories which has a more complex deployment configuration.
+This can introduce a number challenges one of which is maintaining consistency across multiple repositories, for files like shared configurations without introducing git submodules or mono repositories which requires a more complex deployment configuration.
 
 
 > For example adding a github action or maintaing a consistent pull request template accross your organization.
