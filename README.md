@@ -16,6 +16,10 @@ This can introduce a number challenges one of which is maintaining consistency a
 
 `github-deploy` makes maintaining such configurations as easy as a single command.
 
+### Alais
+
+`gh-deploy`
+
 
 ## Usage
 
@@ -23,13 +27,13 @@ This can introduce a number challenges one of which is maintaining consistency a
 
 
 ```shell script
-github-deploy update --org [org] --token [PAT_TOKEN] --dest [LOCATION TO UPLOAD FILE] --source [SOURCE FILE LOCATION]
+gh-deploy update --org [org] --token [PAT_TOKEN] --dest [LOCATION TO UPLOAD FILE] --source [SOURCE FILE LOCATION]
 ```
 
 Example:
 
 ```shell script
-github-deploy update --org tj-actions --token [PAT_TOKEN] --dest '.github/workflows/auto-approve.yml' --source auto-approve.yml
+gh-deploy update --org tj-actions --token [PAT_TOKEN] --dest '.github/workflows/auto-approve.yml' --source auto-approve.yml
 ```
 
 > NOTE: `auto-approve.yml` is located on your local system.
@@ -39,13 +43,13 @@ github-deploy update --org tj-actions --token [PAT_TOKEN] --dest '.github/workfl
 
 
 ```shell script
-github-deploy delete --org [org] --token [PAT_TOKEN] --dest [LOCATION TO DELETE]
+gh-deploy delete --org [org] --token [PAT_TOKEN] --dest [LOCATION TO DELETE]
 ```
 
 Example:
 
 ```shell script
-github-deploy delete --org tj-actions --token [PAT_TOKEN] --dest '.github/auto-approve.yml'
+gh-deploy delete --org tj-actions --token [PAT_TOKEN] --dest '.github/auto-approve.yml'
 ```
 
 
