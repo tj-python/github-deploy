@@ -16,9 +16,7 @@ This can introduce a number challenges one of which is maintaining consistency a
 
 `github-deploy` makes maintaining such configurations as easy as a single command.
 
-### Alais
-
-`gh-deploy`
+**Alais** : `gh-deploy`
 
 
 ## Usage
