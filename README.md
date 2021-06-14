@@ -1,5 +1,5 @@
 [![PyPI version](https://badge.fury.io/py/github-deploy.svg)](https://badge.fury.io/py/github-deploy)
-[![Upload Python Package](https://github.com/tj-python/github-deploy/actions/workflows/python-publish.yml/badge.svg)](https://github.com/tj-python/github-deploy/actions/workflows/python-publish.yml)
+[![Upload Python Package](https://github.com/tj-python/github-deploy/actions/workflows/python-publish.yml/badge.svg)](https://github.com/tj-python/github-deploy/actions/workflows/python-publish.yml) [![Downloads](https://pepy.tech/badge/github-deploy)](https://pepy.tech/project/github-deploy)
 
 # github-deploy
 
