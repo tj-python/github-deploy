@@ -51,5 +51,56 @@ gh-deploy delete --org tj-actions --token [PAT_TOKEN] --dest '.github/auto-appro
 ```
 
 
+
+## COMMAND
+`gh-deploy --help`
+
+```
+Usage: gh-deploy [OPTIONS] COMMAND [ARGS]...
+
+  Deploy changes to multiple github repositories using a single command.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  delete  Delete a file in all repositories owned by an organization/user.
+  upload  Upload a file to all repositories owned by an organization/user.
+
+```
+
+`gh-deploy upload --help`
+
+```
+Usage: gh-deploy upload [OPTIONS]
+
+  Upload a file to all repositories owned by an organization/user.
+
+Options:
+  --org TEXT                    The github organization.
+  --token TEXT                  Personal Access token with read and write
+                                access to org.
+
+  --source PATH                 Source file.
+  --dest TEXT                   Destination path.
+  --overwrite / --no-overwrite  Overwrite existing files.
+  --private / --no-private      Upload files to private repositories.
+  --help                        Show this message and exit.
+```
+
+`gh-deploy delete --help`
+
+```
+Usage: gh-deploy delete [OPTIONS]
+
+  Delete a file in all repositories owned by an organization/user.
+
+Options:
+  --org TEXT    The github organization.
+  --token TEXT  Personal Access token with read and write access to org.
+  --dest TEXT   Destination path to delete.
+  --help        Show this message and exit.
+```
+
 ### Resources
 - http://www.gigamonkeys.com/mono-vs-multi/
