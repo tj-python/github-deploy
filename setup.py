@@ -11,6 +11,15 @@ if os.path.isfile(README_PATH):
 else:
     LONG_DESCRIPTION = ""
 
+deploy_requires = [
+    "bump2version",
+    "readme_renderer[md]",
+]
+
+extras_require = {
+    "deploy": deploy_requires,
+}
+
 
 setup(
     name="github-deploy",
@@ -31,6 +40,7 @@ setup(
     license="MIT",
     packages=find_packages(),
     python_requires='>=3.6',
+    extras_require=extras_require,
     install_requires=[
         "asyncclick",
         "asyncio",
