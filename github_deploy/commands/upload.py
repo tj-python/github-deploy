@@ -8,7 +8,7 @@ import asyncclick as click
 import certifi
 
 from github_deploy.commands._constants import BASE_URL, REPOS_URL
-from github_deploy.commands._utils import get_repo
+from github_deploy.commands._utils import get_repo, can_upload
 
 
 async def get(*, session, url, headers=None, skip_missing=False):
@@ -199,7 +199,13 @@ async def list_repos(*, session, org, token):
     help="Overwrite existing files.",
     default=False,
 )
-async def main(org, token, source, dest, overwrite):
+@click.option(
+    "--private/--no-private",
+    prompt=click.style("Should we Include private repositories", bold=True),
+    help="Upload files to private repositories.",
+    default=True,
+)
+async def main(org, token, source, dest, overwrite, private):
     """Upload a file to all repositories owned by an organization/user."""
     # create instance of Semaphore: max concurrent requests.
     semaphore = asyncio.Semaphore(1000)
@@ -209,13 +215,14 @@ async def main(org, token, source, dest, overwrite):
     async with aiohttp.ClientSession() as session:
         response = await list_repos(org=org, token=token, session=session)
         repos = [
-            get_repo(org=org, project=v["name"])
-            for v in response["items"]
-            if not v["archived"]
+            get_repo(org=org, project=r["name"])
+            for r in response["items"]
+            if not r["archived"] and can_upload(repo=r, include_private=private)
         ]
+        repo_type = 'public and private' if private else 'public'
         click.echo(
             click.style(
-                "Found '{}' repositories non archived repositories:".format(len(repos)),
+                "Found '{}' repositories non archived {} repositories:".format(len(repos), repo_type),
                 fg="green",
             )
         )
