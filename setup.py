@@ -23,7 +23,7 @@ extras_require = {
 
 setup(
     name="github-deploy",
-    version="0.0.5",
+    version="0.0.4",
     description="Deploy yaml files to a large number of repositories in seconds.",
     long_description=LONG_DESCRIPTION,
     long_description_content_type=LONG_DESCRIPTION_TYPE,
