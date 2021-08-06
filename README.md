@@ -3,8 +3,7 @@
 
 # github-deploy
 
-## Problem
-Using [poly repositories](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo#what-is-polyrepo) to manage projects ?
+## Using [poly repositories](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo#what-is-polyrepo) to manage projects ?
 
 This can introduce a number challenges one of which is maintaining consistency across multiple repositories, for files like shared configurations without introducing git submodules or mono repositories which requires a more complex deployment configuration.
 
