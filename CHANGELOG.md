@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.0.8](https://github.com/tj-python/github-deploy/tree/0.0.8) (2021-11-15)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.7...0.0.8)
+
+## [0.0.7](https://github.com/tj-python/github-deploy/tree/0.0.7) (2021-11-15)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.6...0.0.7)
+
+## [0.0.6](https://github.com/tj-python/github-deploy/tree/0.0.6) (2021-11-15)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.5...0.0.6)
+
+## [0.0.5](https://github.com/tj-python/github-deploy/tree/0.0.5) (2021-11-15)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.4...0.0.5)
+
+**Merged pull requests:**
+
+- Upgraded 0.0.3 → 0.0.4 [\#5](https://github.com/tj-python/github-deploy/pull/5) ([jackton1](https://github.com/jackton1))
+
 ## [0.0.4](https://github.com/tj-python/github-deploy/tree/0.0.4) (2021-07-30)
 
 [Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.3...0.0.4)
