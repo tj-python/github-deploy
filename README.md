@@ -18,6 +18,12 @@ This can introduce a number challenges one of which is maintaining consistency a
 **Alias** : `gh-deploy`
 
 
+## Installation
+
+```shell script
+pip install github-deploy
+```
+
 ## Usage
 
 ### Creating or Updating files on github
