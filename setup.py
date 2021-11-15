@@ -48,5 +48,6 @@ setup(
         "certifi",
         "colorama",
         "aiofiles",
+        "anyio",
     ],
 )
