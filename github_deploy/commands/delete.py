@@ -185,7 +185,7 @@ async def main(org, token, dest):
         click.echo(click.style('Deleting "{path}" for all repositories:'.format(path=dest), fg="blue"))
         click.echo("\n".join(repos))
 
-        c = click.prompt(click.style("Continue? [Yn] ", fg="blue"))
+        c = click.prompt(click.style("Continue? [YN] ", fg="blue"))
 
         if c.lower() == "y":
             click.echo(click.style("Deleting...", blink=True, fg="green"))
