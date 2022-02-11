@@ -246,7 +246,7 @@ async def main(org, token, source, dest, overwrite, private):
             )
         )
         click.echo(click.style(deploy_msg, fg="blue"))
-        c = click.prompt(click.style("Continue? [Yn] ", fg="blue"))
+        c = click.prompt(click.style("Continue? [YN] ", fg="blue"))
 
         if c.lower() == "y":
             click.echo(click.style("Uploading...", blink=True, fg="green"))
