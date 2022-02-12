@@ -1,5 +1,7 @@
 [![PyPI version](https://badge.fury.io/py/github-deploy.svg)](https://badge.fury.io/py/github-deploy)
 [![Upload Python Package](https://github.com/tj-python/github-deploy/actions/workflows/deploy.yml/badge.svg)](https://github.com/tj-python/github-deploy/actions/workflows/deploy.yml) [![Downloads](https://pepy.tech/badge/github-deploy)](https://pepy.tech/project/github-deploy)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/tj-python/github-deploy.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/tj-python/github-deploy/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/tj-python/github-deploy.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/tj-python/github-deploy/context:python)
 
 # github-deploy
 
