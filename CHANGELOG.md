@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.0.0](https://github.com/tj-python/github-deploy/tree/v1.0.0) (2022-02-12)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.9...v1.0.0)
+
+**Merged pull requests:**
+
+- Upgraded 0.0.8 → 0.0.9 [\#7](https://github.com/tj-python/github-deploy/pull/7) ([jackton1](https://github.com/jackton1))
+
 ## [0.0.9](https://github.com/tj-python/github-deploy/tree/0.0.9) (2022-02-11)
 
 [Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.8...0.0.9)
