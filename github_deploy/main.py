@@ -17,13 +17,13 @@ class GithubDeploy(click.MultiCommand):
     def get_command(self, ctx, name):
         ns = {}
         fn = os.path.join(plugin_folder, name + '.py')
-        
+
         if os.path.exists(fn):
             with open(fn) as f:
                 code = compile(f.read(), fn, 'exec')
                 eval(code, ns, ns)
             return ns['main']
-        
+
         ctx.fail("Invalid Command: {name}".format(name=name))
 
 
