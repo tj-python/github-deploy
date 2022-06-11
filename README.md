@@ -26,6 +26,14 @@ This can introduce a number challenges one of which is maintaining consistency a
 pip install github-deploy
 ```
 
+## Setup 
+A Personal Access Token which can be created using this [guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+### Required Scopes
+The required scopes are `repo` and `workflow`
+<img width="852" alt="Screen Shot 2022-06-11 at 8 16 01 AM" src="https://user-images.githubusercontent.com/17484350/173187599-483bf220-6263-4a81-917f-d0e0dcef3ed9.png">
+
+
 ## Usage
 
 ### Creating or Updating files on github
