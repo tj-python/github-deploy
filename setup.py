@@ -39,7 +39,7 @@ setup(
     author_email="jtonye@ymail.com",
     license="MIT",
     packages=find_packages(),
-    python_requires='>=3.6',
+    python_requires=">=3.6",
     extras_require=extras_require,
     install_requires=[
         "asyncclick",

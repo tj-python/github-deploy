@@ -120,7 +120,7 @@ async def handle_file_upload(
                 path=dest,
             ),
             fg="blue",
-            bold=True
+            bold=True,
         )
 
     else:
@@ -154,7 +154,7 @@ async def handle_file_upload(
                     dest=upload_response["content"]["path"],
                 ),
                 fg="green",
-                bold=True
+                bold=True,
             )
 
 
@@ -180,7 +180,7 @@ async def list_repos(*, session, org, token):
     prompt=click.style("Enter your personal access token", bold=True),
     help="Personal Access token with read and write access to org.",
     hide_input=True,
-    envvar='TOKEN',
+    envvar="TOKEN",
 )
 @click.option(
     "--source",
@@ -219,10 +219,12 @@ async def main(org, token, source, dest, overwrite, private):
             for r in response["items"]
             if not r["archived"] and can_upload(repo=r, include_private=private)
         ]
-        repo_type = 'public and private' if private else 'public'
+        repo_type = "public and private" if private else "public"
         click.echo(
             click.style(
-                "Found '{}' repositories non archived {} repositories:".format(len(repos), repo_type),
+                "Found '{}' repositories non archived {} repositories:".format(
+                    len(repos), repo_type
+                ),
                 fg="green",
             )
         )
@@ -238,11 +240,12 @@ async def main(org, token, source, dest, overwrite, private):
                 )
             )
         deploy_msg = (
-            'Deploying "{source}" to "{path}" for all repositories'.format(source=source, path=dest)
+            'Deploying "{source}" to "{path}" for all repositories'.format(
+                source=source, path=dest
+            )
             if overwrite
             else 'Deploying "{source}" to repositories that don\'t already have contents at "{path}"'.format(
-                source=source,
-                path=dest
+                source=source, path=dest
             )
         )
         click.echo(click.style(deploy_msg, fg="blue"))

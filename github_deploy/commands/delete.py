@@ -80,9 +80,7 @@ async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
     return response
 
 
-async def handle_file_delete(
-    *, repo, dest, token, semaphore, session
-):
+async def handle_file_delete(*, repo, dest, token, semaphore, session):
     check_exists_response = await check_exists(
         session=session,
         repo=repo,
@@ -114,7 +112,7 @@ async def handle_file_delete(
             exists=exists,
             current_sha=current_sha,
         )
-    
+
         if delete_response:
             return click.style(
                 "Successfully deleted contents at {repo}/{dest}".format(
@@ -124,7 +122,7 @@ async def handle_file_delete(
                 fg="green",
                 bold=True,
             )
-    
+
     return click.style(
         "No content found at {repo}/{dest}".format(repo=repo, dest=dest),
         fg="blue",
@@ -154,7 +152,7 @@ async def list_repos(*, session, org, token):
     prompt=click.style("Enter your personal access token", bold=True),
     help="Personal Access token with read and write access to org.",
     hide_input=True,
-    envvar='TOKEN',
+    envvar="TOKEN",
 )
 @click.option(
     "--dest",
@@ -182,7 +180,11 @@ async def main(org, token, dest):
                 fg="green",
             )
         )
-        click.echo(click.style('Deleting "{path}" for all repositories:'.format(path=dest), fg="blue"))
+        click.echo(
+            click.style(
+                'Deleting "{path}" for all repositories:'.format(path=dest), fg="blue"
+            )
+        )
         click.echo("\n".join(repos))
 
         c = click.prompt(click.style("Continue? [YN] ", fg="blue"))
