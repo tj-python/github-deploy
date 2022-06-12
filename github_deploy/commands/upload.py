@@ -1,46 +1,13 @@
 import asyncio
 import base64
-import ssl
 
 import aiofiles
 import aiohttp
 import asyncclick as click
-import certifi
 
-from github_deploy.commands._constants import BASE_URL, REPOS_URL
+from github_deploy.commands._constants import BASE_URL
+from github_deploy.commands._http_utils import put, list_repos, get
 from github_deploy.commands._utils import get_repo, can_upload
-
-
-async def get(*, session, url, headers=None, skip_missing=False):
-    ssl_context = ssl.create_default_context(cafile=certifi.where())
-
-    async with session.get(
-        url,
-        headers=headers,
-        timeout=70,
-        ssl_context=ssl_context,
-        raise_for_status=not skip_missing,
-    ) as response:
-        if skip_missing and response.status == 404:
-            return {}
-
-        value = await response.json()
-        return value
-
-
-async def put(*, session, url, data, headers=None):
-    ssl_context = ssl.create_default_context(cafile=certifi.where())
-
-    async with session.put(
-        url,
-        json=data,
-        headers=headers,
-        timeout=70,
-        ssl_context=ssl_context,
-        raise_for_status=True,
-    ) as response:
-        value = await response.json()
-        return value
 
 
 async def upload_content(
@@ -163,17 +130,6 @@ async def handle_file_upload(
                 fg="green",
                 bold=True,
             )
-
-
-async def list_repos(*, session, org, token):
-    headers = {
-        "Authorization": "token {token}".format(token=token),
-        "Accept": "application/vnd.github.v3+json",
-    }
-    url = REPOS_URL.format(org=org)
-    click.echo("Retrieving repos at {}".format(url))
-    response = await get(session=session, url=url, headers=headers)
-    return response
 
 
 @click.command()
