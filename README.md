@@ -36,17 +36,17 @@ The required scopes are `repo` and `workflow`
 
 ## Usage
 
-### Creating or Updating files on github
+### Upload files to github
 
 
 ```shell script
-gh-deploy update --org [org] --token [PAT_TOKEN] --dest [LOCATION TO UPLOAD FILE] --source [SOURCE FILE LOCATION]
+gh-deploy upload --org [org] --token [PAT_TOKEN] --dest [LOCATION TO UPLOAD FILE] --source [SOURCE FILE LOCATION]
 ```
 
 Example:
 
 ```shell script
-gh-deploy update --org tj-actions --token [PAT_TOKEN] --dest '.github/workflows/auto-approve.yml' --source auto-approve.yml
+gh-deploy upload --org tj-actions --token [PAT_TOKEN] --dest '.github/workflows/auto-approve.yml' --source auto-approve.yml
 ```
 
 > NOTE: `auto-approve.yml` is located on your local system.
