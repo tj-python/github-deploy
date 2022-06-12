@@ -32,7 +32,8 @@ class GithubDeploy(click.MultiCommand):
 
 main = GithubDeploy(
     help=(
-        "Deploy changes to multiple github repositories using a single command."
+        "Deploy changes to multiple github repositories using "
+        "a single command."
     ),
 )
 
