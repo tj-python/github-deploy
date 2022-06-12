@@ -70,7 +70,9 @@ async def upload_content(
         return
 
     data = {
-        "message": "Updated {}".format(dest) if exists else "Added {}".format(dest),
+        "message": "Updated {}".format(dest)
+        if exists
+        else "Added {}".format(dest),
         "content": base64_content,
     }
     if exists:
@@ -79,7 +81,9 @@ async def upload_content(
     url = BASE_URL.format(repo=repo, path=dest)
 
     async with semaphore:
-        response = await put(session=session, url=url, data=data, headers=headers)
+        response = await put(
+            session=session, url=url, data=data, headers=headers
+        )
 
     return response
 
@@ -90,7 +94,10 @@ async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
 
     async with semaphore:
         response = await get(
-            session=session, url=url, headers=headers, skip_missing=skip_missing
+            session=session,
+            url=url,
+            headers=headers,
+            skip_missing=skip_missing,
         )
 
     return response
@@ -195,7 +202,9 @@ async def list_repos(*, session, org, token):
 )
 @click.option(
     "--overwrite/--no-overwrite",
-    prompt=click.style("Should we overwrite existing contents at this path", fg="blue"),
+    prompt=click.style(
+        "Should we overwrite existing contents at this path", fg="blue"
+    ),
     help="Overwrite existing files.",
     default=False,
 )
@@ -217,7 +226,8 @@ async def main(org, token, source, dest, overwrite, private):
         repos = [
             get_repo(org=org, project=r["name"])
             for r in response["items"]
-            if not r["archived"] and can_upload(repo=r, include_private=private)
+            if not r["archived"]
+            and can_upload(repo=r, include_private=private)
         ]
         repo_type = "public and private" if private else "public"
         click.echo(

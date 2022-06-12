@@ -63,7 +63,9 @@ async def delete_content(
     url = BASE_URL.format(repo=repo, path=dest)
 
     async with semaphore:
-        response = await delete(session=session, url=url, data=data, headers=headers)
+        response = await delete(
+            session=session, url=url, data=data, headers=headers
+        )
 
     return response
 
@@ -74,7 +76,10 @@ async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
 
     async with semaphore:
         response = await get(
-            session=session, url=url, headers=headers, skip_missing=skip_missing
+            session=session,
+            url=url,
+            headers=headers,
+            skip_missing=skip_missing,
         )
 
     return response
@@ -176,13 +181,16 @@ async def main(org, token, dest):
         ]
         click.echo(
             click.style(
-                "Found '{}' repositories non archived repositories".format(len(repos)),
+                "Found '{}' repositories non archived repositories".format(
+                    len(repos)
+                ),
                 fg="green",
             )
         )
         click.echo(
             click.style(
-                'Deleting "{path}" for all repositories:'.format(path=dest), fg="blue"
+                'Deleting "{path}" for all repositories:'.format(path=dest),
+                fg="blue",
             )
         )
         click.echo("\n".join(repos))
