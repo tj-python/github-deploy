@@ -9,9 +9,9 @@ class GithubDeploy(click.MultiCommand):
         rv = []
         for filename in os.listdir(plugin_folder):
             if (
-                filename.endswith(".py")
-                and not filename.startswith("__init__")
-                and not filename.startswith("_")
+                    filename.endswith(".py")
+                    and not filename.startswith("__init__")
+                    and not filename.startswith("_")
             ):
                 rv.append(filename[:-3])
         rv.sort()
@@ -31,7 +31,9 @@ class GithubDeploy(click.MultiCommand):
 
 
 main = GithubDeploy(
-    help="Deploy changes to multiple github repositories using a single command.",
+    help=(
+        "Deploy changes to multiple github repositories using a single command."
+    ),
 )
 
 if __name__ == "__main__":
