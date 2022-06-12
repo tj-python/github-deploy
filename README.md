@@ -12,7 +12,6 @@ This can introduce a number challenges one of which is maintaining consistency a
 
 > For example adding a github action or maintaing a consistent pull request template accross your organization.
 
-
 ## Solution
 
 `github-deploy` makes maintaining such configurations as easy as a single command.
