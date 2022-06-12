@@ -3,4 +3,8 @@ def get_repo(*, org, project):
 
 
 def can_upload(*, repo, include_private):
-    return True if include_private and repo['private'] == True else not repo['private']
+    return (
+        True
+        if include_private and repo["private"] is True
+        else not repo["private"]
+    )

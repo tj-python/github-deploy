@@ -1,46 +1,13 @@
 import asyncio
 import base64
-import ssl
 
 import aiofiles
 import aiohttp
 import asyncclick as click
-import certifi
 
-from github_deploy.commands._constants import BASE_URL, REPOS_URL
+from github_deploy.commands._constants import BASE_URL
+from github_deploy.commands._http_utils import put, list_repos, get
 from github_deploy.commands._utils import get_repo, can_upload
-
-
-async def get(*, session, url, headers=None, skip_missing=False):
-    ssl_context = ssl.create_default_context(cafile=certifi.where())
-
-    async with session.get(
-        url,
-        headers=headers,
-        timeout=70,
-        ssl_context=ssl_context,
-        raise_for_status=not skip_missing,
-    ) as response:
-        if skip_missing and response.status == 404:
-            return {}
-
-        value = await response.json()
-        return value
-
-
-async def put(*, session, url, data, headers=None):
-    ssl_context = ssl.create_default_context(cafile=certifi.where())
-
-    async with session.put(
-        url,
-        json=data,
-        headers=headers,
-        timeout=70,
-        ssl_context=ssl_context,
-        raise_for_status=True,
-    ) as response:
-        value = await response.json()
-        return value
 
 
 async def upload_content(
@@ -70,7 +37,9 @@ async def upload_content(
         return
 
     data = {
-        "message": "Updated {}".format(dest) if exists else "Added {}".format(dest),
+        "message": "Updated {}".format(dest)
+        if exists
+        else "Added {}".format(dest),
         "content": base64_content,
     }
     if exists:
@@ -79,7 +48,9 @@ async def upload_content(
     url = BASE_URL.format(repo=repo, path=dest)
 
     async with semaphore:
-        response = await put(session=session, url=url, data=data, headers=headers)
+        response = await put(
+            session=session, url=url, data=data, headers=headers
+        )
 
     return response
 
@@ -90,7 +61,10 @@ async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
 
     async with semaphore:
         response = await get(
-            session=session, url=url, headers=headers, skip_missing=skip_missing
+            session=session,
+            url=url,
+            headers=headers,
+            skip_missing=skip_missing,
         )
 
     return response
@@ -120,7 +94,7 @@ async def handle_file_upload(
                 path=dest,
             ),
             fg="blue",
-            bold=True
+            bold=True,
         )
 
     else:
@@ -154,19 +128,8 @@ async def handle_file_upload(
                     dest=upload_response["content"]["path"],
                 ),
                 fg="green",
-                bold=True
+                bold=True,
             )
-
-
-async def list_repos(*, session, org, token):
-    headers = {
-        "Authorization": "token {token}".format(token=token),
-        "Accept": "application/vnd.github.v3+json",
-    }
-    url = REPOS_URL.format(org=org)
-    click.echo("Retrieving repos at {}".format(url))
-    response = await get(session=session, url=url, headers=headers)
-    return response
 
 
 @click.command()
@@ -180,7 +143,7 @@ async def list_repos(*, session, org, token):
     prompt=click.style("Enter your personal access token", bold=True),
     help="Personal Access token with read and write access to org.",
     hide_input=True,
-    envvar='TOKEN',
+    envvar="TOKEN",
 )
 @click.option(
     "--source",
@@ -195,7 +158,9 @@ async def list_repos(*, session, org, token):
 )
 @click.option(
     "--overwrite/--no-overwrite",
-    prompt=click.style("Should we overwrite existing contents at this path", fg="blue"),
+    prompt=click.style(
+        "Should we overwrite existing contents at this path", fg="blue"
+    ),
     help="Overwrite existing files.",
     default=False,
 )
@@ -217,12 +182,15 @@ async def main(org, token, source, dest, overwrite, private):
         repos = [
             get_repo(org=org, project=r["name"])
             for r in response["items"]
-            if not r["archived"] and can_upload(repo=r, include_private=private)
+            if not r["archived"]
+            and can_upload(repo=r, include_private=private)
         ]
-        repo_type = 'public and private' if private else 'public'
+        repo_type = "public and private" if private else "public"
         click.echo(
             click.style(
-                "Found '{}' repositories non archived {} repositories:".format(len(repos), repo_type),
+                "Found '{}' repositories non archived {} repositories:".format(
+                    len(repos), repo_type
+                ),
                 fg="green",
             )
         )
@@ -238,11 +206,12 @@ async def main(org, token, source, dest, overwrite, private):
                 )
             )
         deploy_msg = (
-            'Deploying "{source}" to "{path}" for all repositories'.format(source=source, path=dest)
+            'Deploying "{source}" to "{path}" for all repositories'.format(
+                source=source, path=dest
+            )
             if overwrite
             else 'Deploying "{source}" to repositories that don\'t already have contents at "{path}"'.format(
-                source=source,
-                path=dest
+                source=source, path=dest
             )
         )
         click.echo(click.style(deploy_msg, fg="blue"))

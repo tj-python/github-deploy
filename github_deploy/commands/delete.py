@@ -1,44 +1,11 @@
 import asyncio
-import ssl
 
 import aiohttp
 import asyncclick as click
-import certifi
 
-from github_deploy.commands._constants import BASE_URL, REPOS_URL
+from github_deploy.commands._constants import BASE_URL
+from github_deploy.commands._http_utils import delete, get, list_repos
 from github_deploy.commands._utils import get_repo
-
-
-async def get(*, session, url, headers=None, skip_missing=False):
-    ssl_context = ssl.create_default_context(cafile=certifi.where())
-
-    async with session.get(
-        url,
-        headers=headers,
-        timeout=70,
-        ssl_context=ssl_context,
-        raise_for_status=not skip_missing,
-    ) as response:
-        if skip_missing and response.status == 404:
-            return {}
-
-        value = await response.json()
-        return value
-
-
-async def delete(*, session, url, data, headers=None):
-    ssl_context = ssl.create_default_context(cafile=certifi.where())
-
-    async with session.delete(
-        url,
-        json=data,
-        headers=headers,
-        timeout=70,
-        ssl_context=ssl_context,
-        raise_for_status=True,
-    ) as response:
-        value = await response.json()
-        return value
 
 
 async def delete_content(
@@ -63,7 +30,9 @@ async def delete_content(
     url = BASE_URL.format(repo=repo, path=dest)
 
     async with semaphore:
-        response = await delete(session=session, url=url, data=data, headers=headers)
+        response = await delete(
+            session=session, url=url, data=data, headers=headers
+        )
 
     return response
 
@@ -74,15 +43,16 @@ async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
 
     async with semaphore:
         response = await get(
-            session=session, url=url, headers=headers, skip_missing=skip_missing
+            session=session,
+            url=url,
+            headers=headers,
+            skip_missing=skip_missing,
         )
 
     return response
 
 
-async def handle_file_delete(
-    *, repo, dest, token, semaphore, session
-):
+async def handle_file_delete(*, repo, dest, token, semaphore, session):
     check_exists_response = await check_exists(
         session=session,
         repo=repo,
@@ -114,7 +84,7 @@ async def handle_file_delete(
             exists=exists,
             current_sha=current_sha,
         )
-    
+
         if delete_response:
             return click.style(
                 "Successfully deleted contents at {repo}/{dest}".format(
@@ -124,23 +94,12 @@ async def handle_file_delete(
                 fg="green",
                 bold=True,
             )
-    
+
     return click.style(
         "No content found at {repo}/{dest}".format(repo=repo, dest=dest),
         fg="blue",
         bold=True,
     )
-
-
-async def list_repos(*, session, org, token):
-    headers = {
-        "Authorization": "token {token}".format(token=token),
-        "Accept": "application/vnd.github.v3+json",
-    }
-    url = REPOS_URL.format(org=org)
-    click.echo("Retrieving repos at {}".format(url))
-    response = await get(session=session, url=url, headers=headers)
-    return response
 
 
 @click.command()
@@ -154,7 +113,7 @@ async def list_repos(*, session, org, token):
     prompt=click.style("Enter your personal access token", bold=True),
     help="Personal Access token with read and write access to org.",
     hide_input=True,
-    envvar='TOKEN',
+    envvar="TOKEN",
 )
 @click.option(
     "--dest",
@@ -178,11 +137,18 @@ async def main(org, token, dest):
         ]
         click.echo(
             click.style(
-                "Found '{}' repositories non archived repositories".format(len(repos)),
+                "Found '{}' repositories non archived repositories".format(
+                    len(repos)
+                ),
                 fg="green",
             )
         )
-        click.echo(click.style('Deleting "{path}" for all repositories:'.format(path=dest), fg="blue"))
+        click.echo(
+            click.style(
+                'Deleting "{path}" for all repositories:'.format(path=dest),
+                fg="blue",
+            )
+        )
         click.echo("\n".join(repos))
 
         c = click.prompt(click.style("Continue? [YN] ", fg="blue"))
