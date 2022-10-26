@@ -55,8 +55,8 @@ async def delete(*, session, url, data, headers=None):
 
 async def list_repos(*, session, org, token):
     headers = {
-        "Authorization": "token {token}".format(token=token),
-        "Accept": "application/vnd.github.v3+json",
+        "Authorization": "Bearer {token}".format(token=token),
+        "Accept": "application/vnd.github+json",
     }
     url = REPOS_URL.format(org=org)
     click.echo("Retrieving repos at {}".format(url))
