@@ -5,51 +5,7 @@ import asyncclick as click
 
 from github_deploy.commands._constants import BASE_URL
 from github_deploy.commands._http_utils import delete, get, list_repos
-from github_deploy.commands._utils import get_repo
-
-
-async def delete_content(
-    *,
-    session,
-    repo,
-    dest,
-    token,
-    semaphore,
-    exists,
-    current_sha,
-):
-    headers = {
-        "Authorization": "token {token}".format(token=token),
-        "Accept": "application/vnd.github.v3+json",
-    }
-
-    data = {"message": "Deleted {}".format(dest)}
-    if exists:
-        data["sha"] = current_sha
-
-    url = BASE_URL.format(repo=repo, path=dest)
-
-    async with semaphore:
-        response = await delete(
-            session=session, url=url, data=data, headers=headers
-        )
-
-    return response
-
-
-async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
-    headers = {"Authorization": "token {token}".format(token=token)}
-    url = BASE_URL.format(repo=repo, path=dest)
-
-    async with semaphore:
-        response = await get(
-            session=session,
-            url=url,
-            headers=headers,
-            skip_missing=skip_missing,
-        )
-
-    return response
+from github_deploy.commands._utils import get_repo, delete_contents, check_exists
 
 
 async def handle_file_delete(*, repo, dest, token, semaphore, session):
