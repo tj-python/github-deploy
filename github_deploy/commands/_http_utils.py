@@ -62,3 +62,47 @@ async def list_repos(*, session, org, token):
     click.echo("Retrieving repos at {}".format(url))
     response = await get(session=session, url=url, headers=headers)
     return response
+
+
+async def delete_content(
+    *,
+    session,
+    repo,
+    dest,
+    token,
+    semaphore,
+    exists,
+    current_sha,
+):
+    headers = {
+        "Authorization": "Bearer {token}".format(token=token),
+        "Accept": "application/vnd.github+json",
+    }
+
+    data = {"message": "Deleted {}".format(dest)}
+    if exists:
+        data["sha"] = current_sha
+
+    url = BASE_URL.format(repo=repo, path=dest)
+
+    async with semaphore:
+        response = await delete(
+            session=session, url=url, data=data, headers=headers
+        )
+
+    return response
+
+
+async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
+    headers = {"Authorization": "Bearer {token}".format(token=token)}
+    url = BASE_URL.format(repo=repo, path=dest)
+
+    async with semaphore:
+        response = await get(
+            session=session,
+            url=url,
+            headers=headers,
+            skip_missing=skip_missing,
+        )
+
+    return response
