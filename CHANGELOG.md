@@ -1,5 +1,25 @@
 # Changelog
 
+## [v1.0.2](https://github.com/tj-python/github-deploy/tree/v1.0.2) (2022-10-28)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.0.1...v1.0.2)
+
+**Merged pull requests:**
+
+- chore: upgrade required python version to 3.7 [\#27](https://github.com/tj-python/github-deploy/pull/27) ([jackton1](https://github.com/jackton1))
+- chore: reformatted and restructured modules [\#26](https://github.com/tj-python/github-deploy/pull/26) ([jackton1](https://github.com/jackton1))
+- fix: bug with listing repositories [\#25](https://github.com/tj-python/github-deploy/pull/25) ([jackton1](https://github.com/jackton1))
+- Bump pascalgn/automerge-action from 0.15.3 to 0.15.5 [\#24](https://github.com/tj-python/github-deploy/pull/24) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump codacy/codacy-analysis-cli-action from 4.1.0 to 4.2.0 [\#23](https://github.com/tj-python/github-deploy/pull/23) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump tj-actions/semver-diff from 2.0.0 to 2.1.0 [\#22](https://github.com/tj-python/github-deploy/pull/22) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump tj-actions/github-changelog-generator from 1.14 to 1.15 [\#21](https://github.com/tj-python/github-deploy/pull/21) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump codacy/codacy-analysis-cli-action from 4.0.2 to 4.1 [\#20](https://github.com/tj-python/github-deploy/pull/20) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump tj-actions/github-changelog-generator from 1.13 to 1.14 [\#19](https://github.com/tj-python/github-deploy/pull/19) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump codacy/codacy-analysis-cli-action from 1.1.0 to 4.0.2 [\#18](https://github.com/tj-python/github-deploy/pull/18) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore: Fixed lint errors. [\#17](https://github.com/tj-python/github-deploy/pull/17) ([jackton1](https://github.com/jackton1))
+- Update README.md [\#16](https://github.com/tj-python/github-deploy/pull/16) ([jackton1](https://github.com/jackton1))
+- Upgraded v1.0.0 → v1.0.1 [\#15](https://github.com/tj-python/github-deploy/pull/15) ([jackton1](https://github.com/jackton1))
+
 ## [v1.0.1](https://github.com/tj-python/github-deploy/tree/v1.0.1) (2022-06-12)
 
 [Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.0.0...v1.0.1)
