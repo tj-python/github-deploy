@@ -1,73 +1,10 @@
 import asyncio
-import base64
 
-import aiofiles
 import aiohttp
 import asyncclick as click
 
-from github_deploy.commands._constants import BASE_URL
-from github_deploy.commands._http_utils import put, list_repos, get
+from github_deploy.commands._repo_utils import list_repos, check_exists, upload_content
 from github_deploy.commands._utils import get_repo, can_upload
-
-
-async def upload_content(
-    *,
-    session,
-    repo,
-    source,
-    dest,
-    token,
-    semaphore,
-    exists,
-    current_sha,
-    current_content
-):
-    headers = {
-        "Authorization": "token {token}".format(token=token),
-        "Accept": "application/vnd.github.v3+json",
-    }
-
-    async with semaphore:
-        async with aiofiles.open(source, mode="rb") as f:
-            output = await f.read()
-            base64_content = base64.b64encode(output).decode("ascii")
-
-    if current_content == base64_content:
-        click.echo("Skipping: Contents are the same.")
-        return
-
-    data = {
-        "message": "Updated {}".format(dest)
-        if exists
-        else "Added {}".format(dest),
-        "content": base64_content,
-    }
-    if exists:
-        data["sha"] = current_sha
-
-    url = BASE_URL.format(repo=repo, path=dest)
-
-    async with semaphore:
-        response = await put(
-            session=session, url=url, data=data, headers=headers
-        )
-
-    return response
-
-
-async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
-    headers = {"Authorization": "token {token}".format(token=token)}
-    url = BASE_URL.format(repo=repo, path=dest)
-
-    async with semaphore:
-        response = await get(
-            session=session,
-            url=url,
-            headers=headers,
-            skip_missing=skip_missing,
-        )
-
-    return response
 
 
 async def handle_file_upload(

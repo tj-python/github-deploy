@@ -3,8 +3,7 @@ import asyncio
 import aiohttp
 import asyncclick as click
 
-from github_deploy.commands._constants import BASE_URL
-from github_deploy.commands._http_utils import delete, get, list_repos, delete_contents, check_exists
+from github_deploy.commands._repo_utils import list_repos, delete_content, check_exists
 from github_deploy.commands._utils import get_repo
 
 
