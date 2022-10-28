@@ -51,7 +51,7 @@ async def handle_file_delete(*, repo, dest, token, semaphore, session):
             )
 
     return click.style(
-        "No content found at {repo}/{dest}".format(repo=repo, dest=dest),
+        f"No content found at {repo}/{dest}",
         fg="blue",
         bold=True,
     )
@@ -100,7 +100,7 @@ async def main(org, token, dest):
         )
         click.echo(
             click.style(
-                'Deleting "{path}" for all repositories:'.format(path=dest),
+                f'Deleting "{dest}" for all repositories:',
                 fg="blue",
             )
         )

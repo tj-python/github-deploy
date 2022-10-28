@@ -1,5 +1,5 @@
 def get_repo(*, org, project):
-    return "{org}/{project}".format(project=project, org=org)
+    return f"{org}/{project}"
 
 
 def can_upload(*, repo, include_private):
@@ -12,6 +12,6 @@ def can_upload(*, repo, include_private):
 
 def get_headers(*, token):
     return {
-        "Authorization": "Bearer {token}".format(token=token),
+        "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github+json",
     }

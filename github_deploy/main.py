@@ -28,7 +28,7 @@ class GithubDeploy(click.MultiCommand):
                 eval(code, ns, ns)
             return ns["main"]
 
-        ctx.fail("Invalid Command \"{name}\"".format(name=name))
+        ctx.fail(f"Invalid Command \"{name}\"")
 
 
 main = GithubDeploy(
