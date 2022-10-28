@@ -8,3 +8,10 @@ def can_upload(*, repo, include_private):
         if include_private and repo["private"] is True
         else not repo["private"]
     )
+
+
+def get_headers(*, token):
+    return {
+        "Authorization": "Bearer {token}".format(token=token),
+        "Accept": "application/vnd.github+json",
+    }
