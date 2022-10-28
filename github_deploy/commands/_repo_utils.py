@@ -10,7 +10,7 @@ from github_deploy.commands._utils import get_headers
 
 async def list_repos(*, session, org, token):
     url = REPOS_URL.format(org=org)
-    click.echo("Retrieving repos at {}".format(url))
+    click.echo(f"Retrieving repos at {url}")
     response = await get(session=session, url=url, headers=get_headers(token=token))
     return response
 
@@ -25,7 +25,7 @@ async def delete_content(
     exists,
     current_sha,
 ):
-    data = {"message": "Deleted {}".format(dest)}
+    data = {"message": f"Deleted {dest}"}
     if exists:
         data["sha"] = current_sha
 
@@ -75,9 +75,9 @@ async def upload_content(
         return
 
     data = {
-        "message": "Updated {}".format(dest)
+        "message": f"Updated {dest}"
         if exists
-        else "Added {}".format(dest),
+        else f"Added {dest}",
         "content": base64_content,
     }
     if exists:
