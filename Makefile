@@ -36,7 +36,7 @@ release: dist  ## package and upload a release
 	@twine upload dist/*
 
 dist: clean install-deploy  ## builds source and wheel package
-	@pip install twine
+	@pip install build twine
 	@python -m build
 
 increase-version: guard-PART  ## Increase project version
