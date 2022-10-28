@@ -1,5 +1,6 @@
-import asyncclick as click
 import os
+
+import asyncclick as click
 
 plugin_folder = os.path.join(os.path.dirname(__file__), "commands")
 
