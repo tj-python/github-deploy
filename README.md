@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f39cfba28798463f8119896a45a621c6)](https://app.codacy.com/gh/tj-python/github-deploy?utm_source=github.com&utm_medium=referral&utm_content=tj-python/github-deploy&utm_campaign=Badge_Grade_Settings)
 [![PyPI version](https://badge.fury.io/py/github-deploy.svg)](https://badge.fury.io/py/github-deploy)
 [![Upload Python Package](https://github.com/tj-python/github-deploy/actions/workflows/deploy.yml/badge.svg)](https://github.com/tj-python/github-deploy/actions/workflows/deploy.yml) [![Downloads](https://pepy.tech/badge/github-deploy)](https://pepy.tech/project/github-deploy)
 
