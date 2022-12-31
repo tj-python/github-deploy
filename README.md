@@ -1,6 +1,8 @@
 [![PyPI version](https://badge.fury.io/py/github-deploy.svg)](https://badge.fury.io/py/github-deploy)
 [![Upload Python Package](https://github.com/tj-python/github-deploy/actions/workflows/deploy.yml/badge.svg)](https://github.com/tj-python/github-deploy/actions/workflows/deploy.yml) [![Downloads](https://pepy.tech/badge/github-deploy)](https://pepy.tech/project/github-deploy)
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/867aeabe457f4367b9e0013b713add6b)](https://www.codacy.com/gh/tj-python/github-deploy/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tj-python/github-deploy&amp;utm_campaign=Badge_Grade)
+
 # github-deploy
 
 ## Using [polyrepo's](https://github.com/joelparkerhenderson/monorepo_vs_polyrepo#what-is-polyrepo) to manage projects ?
