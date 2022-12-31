@@ -1,9 +1,11 @@
 import base64
+import os
 
 import aiofiles
 import asyncclick as click
+from aiofiles import os as aiofiles_os
 
-from github_deploy.commands._constants import REPOS_URL, BASE_URL
+from github_deploy.commands._constants import REPOS_URL, FILE_CONTENTS_URL
 from github_deploy.commands._http_utils import get, delete, put
 from github_deploy.commands._utils import get_headers
 
@@ -29,7 +31,7 @@ async def delete_content(
     if exists:
         data["sha"] = current_sha
 
-    url = BASE_URL.format(repo=repo, path=dest)
+    url = FILE_CONTENTS_URL.format(repo=repo, path=dest)
 
     async with semaphore:
         response = await delete(
@@ -40,7 +42,7 @@ async def delete_content(
 
 
 async def check_exists(*, session, repo, dest, token, semaphore, skip_missing):
-    url = BASE_URL.format(repo=repo, path=dest)
+    url = FILE_CONTENTS_URL.format(repo=repo, path=dest)
 
     async with semaphore:
         response = await get(
@@ -62,6 +64,7 @@ async def upload_content(
     token,
     semaphore,
     exists,
+    only_update,
     current_sha,
     current_content
 ):
@@ -73,6 +76,19 @@ async def upload_content(
     if current_content == base64_content:
         click.echo("Skipping: Contents are the same.")
         return
+    else:
+        if exists:
+            click.echo("Storing backup of existing file...")
+
+            dirname, filename = os.path.split(f"{repo}/{dest}")
+
+            await aiofiles_os.makedirs(dirname, exist_ok=True)
+
+            async with aiofiles.open(f"{dirname}/{filename}", mode="wb") as f:
+                await f.write(base64.b64decode(current_content))
+        elif only_update:
+            click.echo(f"Skipping: only updating existing files.")
+            return
 
     data = {
         "message": f"Updated {dest}"
@@ -83,7 +99,9 @@ async def upload_content(
     if exists:
         data["sha"] = current_sha
 
-    url = BASE_URL.format(repo=repo, path=dest)
+    url = FILE_CONTENTS_URL.format(repo=repo, path=dest)
+
+    click.echo(f"Uploading {source} to {repo}/{dest}...")
 
     async with semaphore:
         response = await put(

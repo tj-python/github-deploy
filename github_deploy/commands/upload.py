@@ -8,7 +8,7 @@ from github_deploy.commands._utils import get_repo, can_upload
 
 
 async def handle_file_upload(
-    *, repo, source, dest, overwrite, token, semaphore, session
+    *, repo, source, dest, overwrite, only_update, token, semaphore, session
 ):
     check_exists_response = await check_exists(
         session=session,
@@ -23,19 +23,18 @@ async def handle_file_upload(
     current_content = check_exists_response.get("content")
     exists = current_sha is not None
 
-    if exists and not overwrite:
-        return click.style(
-            "Skipped uploading {source} to {repo}/{path}: Found an existing copy.".format(
-                source=source,
-                repo=repo,
-                path=dest,
-            ),
-            fg="blue",
-            bold=True,
-        )
-
-    else:
-        if exists:
+    if exists:
+        if not overwrite:
+            return click.style(
+                "Skipped uploading {source} to {repo}/{path}: Found an existing copy.".format(
+                    source=source,
+                    repo=repo,
+                    path=dest,
+                ),
+                fg="blue",
+                bold=True,
+            )
+        else:
             click.echo(
                 click.style(
                     "Found an existing copy at {repo}/{path} overwriting it's contents...".format(
@@ -45,42 +44,43 @@ async def handle_file_upload(
                 ),
             )
 
-        upload_response = await upload_content(
-            session=session,
-            repo=repo,
-            source=source,
-            dest=dest,
-            token=token,
-            semaphore=semaphore,
-            exists=exists,
-            current_sha=current_sha,
-            current_content=current_content,
-        )
+    upload_response = await upload_content(
+        session=session,
+        repo=repo,
+        source=source,
+        dest=dest,
+        token=token,
+        semaphore=semaphore,
+        exists=exists,
+        only_update=only_update,
+        current_sha=current_sha,
+        current_content=current_content,
+    )
 
-        if upload_response:
-            return click.style(
-                "Successfully uploaded '{source}' to {repo}/{dest}".format(
-                    source=upload_response["content"]["name"],
-                    repo=repo,
-                    dest=upload_response["content"]["path"],
-                ),
-                fg="green",
-                bold=True,
-            )
+    if upload_response:
+        return click.style(
+            "Successfully uploaded '{source}' to {repo}/{dest}".format(
+                source=upload_response["content"]["name"],
+                repo=repo,
+                dest=upload_response["content"]["path"],
+            ),
+            fg="green",
+            bold=True,
+        )
 
 
 @click.command()
-@click.option(
-    "--org",
-    prompt=click.style("Enter your github user/organization", bold=True),
-    help="The github organization.",
-)
 @click.option(
     "--token",
     prompt=click.style("Enter your personal access token", bold=True),
     help="Personal Access token with read and write access to org.",
     hide_input=True,
     envvar="TOKEN",
+)
+@click.option(
+    "--org",
+    prompt=click.style("Enter your github user/organization", bold=True),
+    help="The github organization.",
 )
 @click.option(
     "--source",
@@ -98,16 +98,30 @@ async def handle_file_upload(
     prompt=click.style(
         "Should we overwrite existing contents at this path", fg="blue"
     ),
+    is_flag=True,
+    show_default=True,
     help="Overwrite existing files.",
+    default=False,
+)
+@click.option(
+    "--only-update/--no-only-update",
+    prompt=click.style(
+        "Should we only update existing files at this path", fg="blue"
+    ),
+    is_flag=True,
+    show_default=True,
+    help="Only update existing files.",
     default=False,
 )
 @click.option(
     "--private/--no-private",
     prompt=click.style("Should we Include private repositories", bold=True),
+    is_flag=True,
+    show_default=True,
     help="Upload files to private repositories.",
     default=True,
 )
-async def main(org, token, source, dest, overwrite, private):
+async def main(org, token, source, dest, overwrite, only_update, private):
     """Upload a file to all repositories owned by an organization/user."""
     # create instance of Semaphore: max concurrent requests.
     semaphore = asyncio.Semaphore(1000)
@@ -171,6 +185,7 @@ async def main(org, token, source, dest, overwrite, private):
                     dest=dest,
                     token=token,
                     overwrite=overwrite,
+                    only_update=only_update,
                     session=session,
                     semaphore=semaphore,
                 )
