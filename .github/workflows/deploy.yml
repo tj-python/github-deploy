@@ -50,6 +50,7 @@ jobs:
         with:
           base: "main"
           title: "Upgraded ${{ steps.semver-diff.outputs.old_version }} → ${{ steps.semver-diff.outputs.new_version }}"
+          labels: "merge when passing"
           branch: "chore/upgrade-${{ steps.semver-diff.outputs.old_version }}-to-${{ steps.semver-diff.outputs.new_version }}"
           commit-message: "Upgraded from ${{ steps.semver-diff.outputs.old_version }} → ${{ steps.semver-diff.outputs.new_version }}"
           body: "View [CHANGES](https://github.com/${{ github.repository }}/compare/${{ steps.semver-diff.outputs.old_version }}...${{ steps.semver-diff.outputs.new_version }})"
