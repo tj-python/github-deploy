@@ -75,7 +75,7 @@ async def upload_content(
     if current_content == base64_content:
         click.echo(
             click.style(
-                f"Skipping {source} to {repo}/{dest}: No changes detected.",
+                f"Skipped uploading {source} to {repo}/{dest}: No changes detected.",
                 fg="yellow",
                 bold=True,
             )
