@@ -25,7 +25,7 @@ async def handle_file_upload(
 
     if exists:
         if not overwrite:
-            return click.style(
+            click.style(
                 "Skipped uploading {source} to {repo}/{path}: Found an existing copy.".format(
                     source=source,
                     repo=repo,
@@ -132,7 +132,7 @@ async def main(org, token, source, dest, overwrite, only_update, private):
         response = await list_repos(org=org, token=token, session=session)
         repos = [
             get_repo(org=org, project=r["name"])
-            for r in response["items"]
+            for r in response
             if not r["archived"]
             and can_upload(repo=r, include_private=private)
         ]
@@ -156,15 +156,21 @@ async def main(org, token, source, dest, overwrite, only_update, private):
                     fg="bright_red",
                 )
             )
-        deploy_msg = (
-            'Deploying "{source}" to "{path}" for all repositories'.format(
+
+        if overwrite:
+            if only_update:
+                deploy_msg = "Updating '{source}' for existing files located at '{dest}'".format(
+                    source=source, dest=dest
+                )
+            else:
+                deploy_msg = "Overwriting '{dest}' with '{source}'".format(
+                    source=source, dest=dest
+                )
+        else:
+            deploy_msg = "Deploying '{source}' to repositories that don\'t already have contents at '{path}'".format(
                 source=source, path=dest
             )
-            if overwrite
-            else 'Deploying "{source}" to repositories that don\'t already have contents at "{path}"'.format(
-                source=source, path=dest
-            )
-        )
+
         click.echo(click.style(deploy_msg, fg="blue"))
         c = click.prompt(click.style("Continue? [YN] ", fg="blue"))
 
