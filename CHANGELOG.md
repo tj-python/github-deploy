@@ -1,5 +1,18 @@
 # Changelog
 
+## [v1.1.0](https://github.com/tj-python/github-deploy/tree/v1.1.0) (2023-01-06)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.0.2...v1.1.0)
+
+**Merged pull requests:**
+
+- feat: update api url and add new features [\#36](https://github.com/tj-python/github-deploy/pull/36) ([jackton1](https://github.com/jackton1))
+- feat: add support for updating existing files [\#32](https://github.com/tj-python/github-deploy/pull/32) ([jackton1](https://github.com/jackton1))
+- Bump tj-actions/github-changelog-generator from 1.15 to 1.17 [\#31](https://github.com/tj-python/github-deploy/pull/31) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add CodeQL workflow for GitHub code scanning [\#30](https://github.com/tj-python/github-deploy/pull/30) ([lgtm-com[bot]](https://github.com/apps/lgtm-com))
+- Bump hmarr/auto-approve-action from 2 to 3 [\#29](https://github.com/tj-python/github-deploy/pull/29) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Upgraded v1.0.1 → v1.0.2 [\#28](https://github.com/tj-python/github-deploy/pull/28) ([jackton1](https://github.com/jackton1))
+
 ## [v1.0.2](https://github.com/tj-python/github-deploy/tree/v1.0.2) (2022-10-28)
 
 [Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.0.1...v1.0.2)
