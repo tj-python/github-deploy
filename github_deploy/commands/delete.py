@@ -87,7 +87,7 @@ async def main(org, token, dest):
         response = await list_repos(org=org, token=token, session=session)
         repos = [
             get_repo(org=org, project=v["name"])
-            for v in response["items"]
+            for v in response
             if not v["archived"]
         ]
         click.echo(
