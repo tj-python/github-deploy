@@ -1,5 +1,19 @@
 # Changelog
 
+## [v1.1.1](https://github.com/tj-python/github-deploy/tree/v1.1.1) (2023-04-05)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.1.0...v1.1.1)
+
+**Merged pull requests:**
+
+- Bump peter-evans/create-pull-request from 4 to 5 [\#43](https://github.com/tj-python/github-deploy/pull/43) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump tj-actions/github-changelog-generator from 1.17 to 1.18 [\#42](https://github.com/tj-python/github-deploy/pull/42) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump codacy/codacy-analysis-cli-action from 4.2.0 to 4.3.0 [\#41](https://github.com/tj-python/github-deploy/pull/41) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump pascalgn/automerge-action from 0.15.5 to 0.15.6 [\#40](https://github.com/tj-python/github-deploy/pull/40) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump tj-actions/semver-diff from 2.4.0 to 2.4.1 [\#39](https://github.com/tj-python/github-deploy/pull/39) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump tj-actions/semver-diff from 2.1.0 to 2.4.0 [\#38](https://github.com/tj-python/github-deploy/pull/38) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Upgraded v1.0.2 → v1.1.0 [\#37](https://github.com/tj-python/github-deploy/pull/37) ([jackton1](https://github.com/jackton1))
+
 ## [v1.1.0](https://github.com/tj-python/github-deploy/tree/v1.1.0) (2023-01-06)
 
 [Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.0.2...v1.1.0)
