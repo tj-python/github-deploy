@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.0](https://github.com/tj-python/github-deploy/tree/v1.2.0) (2023-07-05)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.1.2...v1.2.0)
+
+**Merged pull requests:**
+
+- Upgraded v1.1.1 → v1.1.2 [\#46](https://github.com/tj-python/github-deploy/pull/46) ([jackton1](https://github.com/jackton1))
+
 ## [v1.1.2](https://github.com/tj-python/github-deploy/tree/v1.1.2) (2023-05-29)
 
 [Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.1.1...v1.1.2)
@@ -92,15 +100,15 @@
 
 ## [0.0.7](https://github.com/tj-python/github-deploy/tree/0.0.7) (2021-11-15)
 
-[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.5...0.0.7)
-
-## [0.0.5](https://github.com/tj-python/github-deploy/tree/0.0.5) (2021-11-15)
-
-[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.6...0.0.5)
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.6...0.0.7)
 
 ## [0.0.6](https://github.com/tj-python/github-deploy/tree/0.0.6) (2021-11-15)
 
-[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.4...0.0.6)
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.5...0.0.6)
+
+## [0.0.5](https://github.com/tj-python/github-deploy/tree/0.0.5) (2021-11-15)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.4...0.0.5)
 
 **Merged pull requests:**
 
