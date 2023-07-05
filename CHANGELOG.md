@@ -1,5 +1,14 @@
 # Changelog
 
+## [v1.1.2](https://github.com/tj-python/github-deploy/tree/v1.1.2) (2023-05-29)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.1.1...v1.1.2)
+
+**Merged pull requests:**
+
+- Bump tj-actions/github-changelog-generator from 1.18 to 1.19 [\#45](https://github.com/tj-python/github-deploy/pull/45) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Upgraded v1.1.0 → v1.1.1 [\#44](https://github.com/tj-python/github-deploy/pull/44) ([jackton1](https://github.com/jackton1))
+
 ## [v1.1.1](https://github.com/tj-python/github-deploy/tree/v1.1.1) (2023-04-05)
 
 [Full Changelog](https://github.com/tj-python/github-deploy/compare/v1.1.0...v1.1.1)
@@ -83,15 +92,15 @@
 
 ## [0.0.7](https://github.com/tj-python/github-deploy/tree/0.0.7) (2021-11-15)
 
-[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.6...0.0.7)
-
-## [0.0.6](https://github.com/tj-python/github-deploy/tree/0.0.6) (2021-11-15)
-
-[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.5...0.0.6)
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.5...0.0.7)
 
 ## [0.0.5](https://github.com/tj-python/github-deploy/tree/0.0.5) (2021-11-15)
 
-[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.4...0.0.5)
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.6...0.0.5)
+
+## [0.0.6](https://github.com/tj-python/github-deploy/tree/0.0.6) (2021-11-15)
+
+[Full Changelog](https://github.com/tj-python/github-deploy/compare/0.0.4...0.0.6)
 
 **Merged pull requests:**
 
